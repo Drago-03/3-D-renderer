@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Interactive 3D visualization of a modern wooden house with customizable features">
+    <meta name="keywords" content="modern house, wooden house, 3D visualization, architecture, interior design">
+    <title>Modern Wooden House Visualization</title>
+    <link rel="stylesheet" href="/src/styles/main.css">
+</head>
+<body>
+    <nav class="navigation">
+        <div class="nav-content">
+            <h1>Modern Wooden House</h1>
+            <div class="view-controls">
+                <button id="view2D" class="active">2D View</button>
+                <button id="view3D">3D View</button>
+            </div>
+        </div>
+    </nav>
+
+    <main class="main-content">
+        <aside class="controls-sidebar">
+            <div class="floor-selector">
+                <h2>Floor Selection</h2>
+                <select id="floorSelect">
+                    <option value="ground">Ground Floor</option>
+                    <option value="first">First Floor</option>
+                    <option value="second">Second Floor</option>
+                    <option value="third">Third Floor</option>
+                </select>
+            </div>
+            
+            <div class="customization-panel">
+                <h2>Customization</h2>
+                <div id="tweakpane-container"></div>
+            </div>
+
+            <div class="house-info">
+                <h2>Property Details</h2>
+                <ul>
+                    <li>Total Area: 440 sq ft</li>
+                    <li>Coverage: 75%</li>
+                    <li>Floors: 4</li>
+                    <li>Parking: 4 Cars, 2 Bikes</li>
+                </ul>
+            </div>
+        </aside>
+
+        <section class="visualization-container">
+            <div id="viewContainer">
+                <div class="loading">Initializing visualization...</div>
+            </div>
+        </section>
+    </main>
+
+    <script type="module" src="/src/js/main.js"></script>
+</body>
+</html>

@@ -1,0 +1,71 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+    --primary-color: #2c3e50;
+    --secondary-color: #34495e;
+    --accent-color: #3498db;
+    --background-color: #f5f5f5;
+    --text-color: #2c3e50;
+}
+
+@layer components {
+    .navigation {
+        @apply bg-slate-800 p-4 text-white;
+    }
+
+    .nav-content {
+        @apply max-w-7xl mx-auto flex justify-between items-center;
+    }
+
+    .view-controls button {
+        @apply bg-transparent border-2 border-white text-white px-4 py-2 ml-2 cursor-pointer rounded-md transition-all duration-300;
+    }
+
+    .view-controls button.active {
+        @apply bg-blue-500 border-blue-500;
+    }
+
+    .main-content {
+        @apply flex max-w-7xl mx-auto gap-8 p-4 h-[calc(100vh-150px)];
+    }
+
+    .controls-sidebar {
+        @apply w-72 bg-white p-6 rounded-lg shadow-lg overflow-y-auto;
+    }
+
+    .visualization-container {
+        @apply flex-1 bg-white rounded-lg shadow-lg overflow-hidden;
+    }
+
+    .loading {
+        @apply absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-lg text-gray-700;
+    }
+
+    h2 {
+        @apply text-xl mb-4 text-slate-800;
+    }
+
+    select {
+        @apply w-full p-2 border border-gray-200 rounded-md text-base mb-6;
+    }
+
+    .house-info ul {
+        @apply list-none;
+    }
+
+    .house-info li {
+        @apply py-2 border-b border-gray-100;
+    }
+}
+
+@media (max-width: 768px) {
+    .main-content {
+        @apply flex-col h-auto;
+    }
+
+    .controls-sidebar {
+        @apply w-full;
+    }
+}
