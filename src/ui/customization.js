@@ -1,4 +1,5 @@
 import { Pane } from 'tweakpane';
+import React, { useState } from 'react';
 
 export function setupUI(renderer, materialManager) {
   const pane = new Pane({
@@ -53,3 +54,46 @@ export function setupUI(renderer, materialManager) {
     });
   });
 }
+
+export const MaterialControls: React.FC = () => {
+  const [colors, setColors] = useState({
+    walls: '#8B4513',
+    roof: '#A52A2A',
+    windows: '#87CEEB'
+  });
+
+  return (
+    <div className="fixed right-4 top-4 bg-white p-4 rounded-lg shadow-lg">
+      <h3 className="text-lg font-bold mb-4">Customize Materials</h3>
+      
+      <div className="space-y-4">
+        <div>
+          <label>Wall Color</label>
+          <input 
+            type="color" 
+            value={colors.walls}
+            onChange={(e) => setColors({...colors, walls: e.target.value})}
+          />
+        </div>
+
+        <div>
+          <label>Roof Color</label>
+          <input 
+            type="color" 
+            value={colors.roof}
+            onChange={(e) => setColors({...colors, roof: e.target.value})}
+          />
+        </div>
+
+        <div>
+          <label>Window Tint</label>
+          <input 
+            type="color" 
+            value={colors.windows}
+            onChange={(e) => setColors({...colors, windows: e.target.value})}
+          />
+        </div>
+      </div>
+    </div>
+  );
+};

@@ -1,19 +1,19 @@
-import { create } from 'zustand';
+import { create } from 'zustand'
 
-interface HouseState {
-  viewMode: '2d' | '3d';
-  floor: 'ground' | 'first' | 'second' | 'third';
-  roofMode: 'open' | 'closed' | 'tinted';
-  setViewMode: (mode: '2d' | '3d') => void;
-  setFloor: (floor: 'ground' | 'first' | 'second' | 'third') => void;
-  setRoofMode: (mode: 'open' | 'closed' | 'tinted') => void;
+interface HouseStore {
+  wallColor: string
+  roofColor: string
+  windowColor: string
+  setWallColor: (color: string) => void
+  setRoofColor: (color: string) => void
+  setWindowColor: (color: string) => void
 }
 
-export const useHouseStore = create<HouseState>((set) => ({
-  viewMode: '3d',
-  floor: 'ground',
-  roofMode: 'closed',
-  setViewMode: (mode) => set({ viewMode: mode }),
-  setFloor: (floor) => set({ floor }),
-  setRoofMode: (mode) => set({ roofMode: mode }),
-}));
+export const useHouseStore = create<HouseStore>((set) => ({
+  wallColor: '#FFFFFF',
+  roofColor: '#8B4513',
+  windowColor: '#87CEEB',
+  setWallColor: (color) => set({ wallColor: color }),
+  setRoofColor: (color) => set({ roofColor: color }),
+  setWindowColor: (color) => set({ windowColor: color })
+}))

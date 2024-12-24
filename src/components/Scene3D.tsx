@@ -18,3 +18,20 @@ export const Scene3D: React.FC = () => {
     </div>
   );
 };
+
+export const Controls: React.FC = () => {
+  const { viewMode, setViewMode } = useHouseStore();
+  
+  const toggleView = () => {
+    setViewMode(viewMode === '2d' ? '3d' : '2d');
+  };
+
+  return (
+    <button 
+      onClick={toggleView}
+      className="fixed bottom-8 left-1/2 transform -translate-x-1/2 bg-indigo-600 text-white px-6 py-3 rounded-lg shadow-lg hover:bg-indigo-700 transition-colors"
+    >
+      {viewMode === '2d' ? '3D View' : '2D View'}
+    </button>
+  );
+};

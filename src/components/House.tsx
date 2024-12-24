@@ -1,47 +1,76 @@
-import React from 'react';
-import { useHouseStore } from '../store/houseStore';
-import * as THREE from 'three';
+import { useRef } from 'react'
+import { Mesh, Vector3 } from 'three'
+import { useFrame } from '@react-three/fiber'
+import { useHouseStore } from '../store/houseStore'
+import { House } from './House'
+function App() {
+  return (
+    <Canvas>
+      <House position={[0, 0, 0]} scale={[1, 1, 1]} />
+    </Canvas>
+  )
+}
+export default App
+interface HouseProps {
+  position?: [number, number, number]
+  scale?: [number, number, number]
+}
 
-export const House: React.FC = () => {
-  const { floor, roofMode } = useHouseStore();
+export const House: React.FC<HouseProps> = ({
+  position = [0, 0, 0],
+  scale = [1, 1, 1]
+}) => {
+  const meshRef = useRef<Mesh>(null)
+  const { wallColor, roofColor, windowColor } = useHouseStore()
 
   return (
-    <group>
-      {/* Base structure */}
-      <mesh position={[0, 0, 0]}>
-        <boxGeometry args={[20, 0.5, 15]} />
-        <meshStandardMaterial color="#concrete" />
+    <group position={new Vector3(...position)} scale={new Vector3(...scale)}>
+      <mesh position={[0, -0.5, 0]} castShadow receiveShadow>
+        <boxGeometry args={[20, 1, 15]} />
+        <meshStandardMaterial color="#808080" />
       </mesh>
 
-      {/* Ground floor */}
-      <mesh position={[0, 2, 0]}>
-        <boxGeometry args={[19, 4, 14]} />
-        <meshStandardMaterial color="#wooden" />
+      <mesh position={[0, 4, 0]} castShadow receiveShadow ref={meshRef}>
+        <boxGeometry args={[18, 8, 13]} />
+        <meshStandardMaterial color={wallColor || '#FFFFFF'} />
       </mesh>
 
-      {/* Additional floors will be added based on selected floor */}
-      {(floor === 'first' || floor === 'second' || floor === 'third') && (
-        <mesh position={[0, 6.5, 0]}>
-          <boxGeometry args={[19, 4, 14]} />
-          <meshStandardMaterial color="#wooden" />
+      <mesh position={[0, 9, 0]} rotation={[0, 0, Math.PI * 0.1]} castShadow>
+        <boxGeometry args={[20, 1, 15]} />
+        <meshStandardMaterial color={roofColor || '#8B4513'} />
+      </mesh>
+
+      <group position={[0, 4, 6.6]}>
+        {[-4, 4].map((x, i) => (
+          <mesh key={i} position={[x, 0, 0]} castShadow>
+            <boxGeometry args={[3, 3, 0.1]} />
+            <meshPhysicalMaterial
+              color={windowColor || '#87CEEB'}
+              transparent
+              opacity={0.6}
+              transmission={0.5}
+            />
+          </mesh>
+        ))}
+      </group>
+
+      <mesh position={[0, 1.5, 6.6]} castShadow>
+        <boxGeometry args={[2, 3, 0.1]} />
+        <meshStandardMaterial color="#4A3C2C" />
+      </mesh>
+
+      <group position={[0, 6, 6]}>
+        <mesh position={[0, 0, 0]} castShadow receiveShadow>
+          <boxGeometry args={[8, 0.2, 2]} />
+          <meshStandardMaterial color="#A9A9A9" />
         </mesh>
-      )}
-
-      {/* Roof */}
-      <mesh position={[0, 11, 0]} rotation={[0, 0, THREE.MathUtils.degToRad(20)]}>
-        <boxGeometry args={[21, 0.5, 16]} />
-        <meshStandardMaterial 
-          color={roofMode === 'tinted' ? '#333' : '#wooden'}
-          transparent={roofMode === 'open'}
-          opacity={roofMode === 'open' ? 0.3 : 1}
-        />
-      </mesh>
-
-      {/* Garden and pond area */}
-      <mesh position={[10, 0.3, 7]}>
-        <cylinderGeometry args={[2, 2, 0.3, 32]} />
-        <meshStandardMaterial color="#water" />
-      </mesh>
+        <mesh position={[0, 1, 1]} castShadow>
+          <boxGeometry args={[8, 2, 0.1]} />
+          <meshPhysicalMaterial color="#FFFFFF" transparent opacity={0.4} />
+        </mesh>
+      </group>
     </group>
-  );
-};
+  )
+}
+
+export default House// export default House
