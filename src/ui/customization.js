@@ -55,7 +55,7 @@ export function setupUI(renderer, materialManager) {
   });
 }
 
-export const MaterialControls: React.FC = () => {
+export const MaterialControls = () => {
   const [colors, setColors] = useState({
     walls: '#8B4513',
     roof: '#A52A2A',

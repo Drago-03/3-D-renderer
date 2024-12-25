@@ -2,11 +2,11 @@ import { useRef } from 'react'
 import { Mesh, Vector3 } from 'three'
 import { useFrame } from '@react-three/fiber'
 import { useHouseStore } from '../store/houseStore'
-import { House } from './House'
+import { House as ExternalHouse } from './House'
 function App() {
   return (
     <Canvas>
-      <House position={[0, 0, 0]} scale={[1, 1, 1]} />
+      <LocalHouse position={[0, 0, 0]} scale={[1, 1, 1]} />
     </Canvas>
   )
 }
@@ -16,7 +16,7 @@ interface HouseProps {
   scale?: [number, number, number]
 }
 
-export const House: React.FC<HouseProps> = ({
+export const LocalHouse: React.FC<HouseProps> = ({
   position = [0, 0, 0],
   scale = [1, 1, 1]
 }) => {

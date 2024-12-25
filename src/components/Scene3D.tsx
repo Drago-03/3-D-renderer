@@ -2,6 +2,7 @@ import React, { Suspense } from 'react';
 import { Canvas } from '@react-three/fiber';
 import { OrbitControls, Environment } from '@react-three/drei';
 import { House } from './House';
+import { useHouseStore } from '../store/houseStore';
 
 export const Scene3D: React.FC = () => {
   return (
